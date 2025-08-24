@@ -21,12 +21,26 @@ export default {
             },
         ],
         "@semantic-release/release-notes-generator",
-        "@semantic-release/changelog",
+        [
+            "@semantic-release/changelog",
+            {
+                changelogFile: "CHANGELOG.md",
+            },
+        ],
+        [
+            "@semantic-release/github",
+            {
+                assets: [
+                    { path: "CHANGELOG.md", label: "Changelog" },
+                ],
+            },
+        ],
         [
             "@semantic-release/git",
             {
                 assets: ["CHANGELOG.md"],
-                message: "chore(release): ${nextRelease.version} [skip ci]",
+                message:
+                    "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
             },
         ],
     ],
